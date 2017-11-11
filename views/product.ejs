@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create A Product</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
 </head>
 <body>
 
@@ -16,18 +14,26 @@
         <div class="row col s12"> </div>
           <div class = "selection">
               <div class = "container"> 
+                <a href="/">Home</a>
                   <h1>Create A Product</h1>
               <div class="row">
                   <form action="/create/product" method="post" class="col s12">
                       <input type="text" name="name" placeholder="Product Name">
+
+                      <select name="store_id">
+                     <% for(var i = 0; i<stores.length; i++){ %>
+                     <option value="<%= stores[i].id %>"> <%= stores[i].name %> </option>
+                     <% } %>
+                    </select>
+
                       <input type="text" name="description" placeholder="Product description">
-                      <input type="number" name="price" placeholder="price">
+                      <input type="number" step=".01" name="price" placeholder="Price">
                       </select>
                       
                       <input type="submit">
                     
                       </form>
-                      <a href="/"></a>
+
                   </div>
             </div>
           </div>

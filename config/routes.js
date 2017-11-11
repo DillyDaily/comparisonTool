@@ -2,9 +2,11 @@
 
 const store = require("../controllers/store.js")
 const product = require("../controllers/product.js")
+const compare = require("../controllers/compare.js")
 module.exports = function(app){
 
-  // app.use(storeCheck);
+//Middleware
+  app.use(checkSession);
 
   app.get('/create/store', store.index);
 
@@ -14,15 +16,21 @@ module.exports = function(app){
 
   app.post('/create/product', product.create);
 
+  app.get('/', compare.getAll);
+
+  app.get('/compare/:id', compare.addCompare);
+
+  app.get('/compare', compare.showCompare);
+
 }
 
-// function storeCheck(req, res, next){
-//   if(!req.session.store){
-//     req.session.store = [];
-//     req.session.save(()=>{
-//       next();
-//     })
-//   }else{
-//     next();
-//   }
-// }
+function checkSession(req, res, next){
+  if(!req.session.compare){
+    req.session.compare = [];
+    req.session.save(()=>{
+      next();
+    })
+  }else{
+    next();
+  }
+}
